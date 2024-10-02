@@ -1,0 +1,161 @@
+/* General Page Style */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white; /* Dominant white */
+  color: #0D1321; /* Dark blue-black for text */
+}
+
+/* App Layout */
+.App {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  min-height: 100vh;
+}
+
+header {
+  background-color: white;
+  padding: 20px;
+  border-bottom: 2px solid #D3D3D3; /* Warm light gray for header border */
+}
+/* Styles for the input fields */
+input[type="text"],
+input[type="date"],
+
+select {
+    width: 10%;
+    padding: 10px; /* Add padding for spacing */
+    margin: 10px 0; /* Space between fields */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+    background-color: #fff; /* White background */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+/* Change border color on focus */
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #007BFF; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+h1 {
+  color: #0D1321; /* Dark blue-black for headings */
+  margin: 0;
+  font-size: 2rem;
+}
+
+main {
+  background-color: white; /* White background for main area */
+  padding: 20px;
+  color: #0D1321; /* Text color */
+}
+
+/* Form Styling */
+form {
+  margin-bottom: 20px;
+}
+
+input, button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+input[type="text"], input[type="date"] {
+  width: 200px;
+  background-color: white;
+  color: #0D1321; /* Dark blue-black for input text */
+  border: 1px solid #D3D3D3; /* Warm light gray border */
+}
+
+button {
+  background-color: #D3D3D3; /* Warm light gray for buttons */
+  color: #0D1321;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0D1321; /* Dark blue-black on hover */
+  color: white;
+}
+
+/* Expenses List */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #F5F5F5; /* Light gray background for list items */
+  color: #0D1321; /* Dark blue-black text */
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+li button {
+  background-color: #D3D3D3; /* Warm light gray for delete buttons */
+  color: #0D1321;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+li button:hover {
+  background-color: white;
+  color: #0D1321;
+}
+
+/* Footer or Summary Section */
+section {
+  margin-top: 20px;
+}
+
+h2 {
+  color: #D3D3D3; /* Warm light gray for section headings */
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 15px; /* Increased padding for more space */
+  text-align: left;
+}
+
+th {
+  background-color: #0D1321; /* Dark blue-black for header */
+  color: white; /* White text for header */
+}
+
+tr:nth-child(even) {
+  background-color: #F5F5F5; /* Light gray for even rows */
+}
+
+tr:hover {
+  background-color: #D3D3D3; /* Warm light gray on hover */
+}
+
+/* Additional spacing between rows */
+tr {
+  margin-bottom: 10px; /* Space between rows */
+}
+
+li button {
+  background-color: #D3D3D3; /* Warm light gray for delete buttons */
+  color: #0D1321;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
