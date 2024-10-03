@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddExpense from './components/AddExpense';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -9,45 +9,59 @@ function App() {
   const [filterDate, setFilterDate] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [categories, setCategories] = useState([]);
+  const [budgetLimit, setBudgetLimit] = useState(0);  // State for budget limit
+  const [totalExpenses, setTotalExpenses] = useState(0);  // State for total expenses
   const today = new Date().toISOString().split("T")[0];
 
   // Function to add or update an expense
   const handleExpenseSubmit = (expense) => {
     if (currentExpenseIndex !== null) {
-      // Update existing expense
       const updatedExpenses = expenses.map((exp, index) =>
         index === currentExpenseIndex ? expense : exp
       );
       setExpenses(updatedExpenses);
-      setCurrentExpenseIndex(null); // Reset current expense index after editing
+      setCurrentExpenseIndex(null);
     } else {
-      // Add new expense
       setExpenses([...expenses, expense]);
     }
   };
 
-  // Function to delete an expense by index
+  // Function to calculate total expenses
+  useEffect(() => {
+    const total = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    setTotalExpenses(total);
+  }, [expenses]);
+
+  // Function to delete an expense
   const deleteExpense = (index) => {
-    const updatedExpenses = expenses.filter((_, i) => i !== index); // Remove the selected expense
-    setExpenses(updatedExpenses); // Update the state
+    const updatedExpenses = expenses.filter((_, i) => i !== index);
+    setExpenses(updatedExpenses);
   };
 
-  // Function to set the expense for editing
   const editExpense = (index) => {
-    setCurrentExpenseIndex(index); // Set the current expense index for editing
+    setCurrentExpenseIndex(index);
   };
 
   const addCategory = (newCategory) => {
     if (newCategory && !categories.includes(newCategory)) {
-        setCategories([...categories, newCategory]);
+      setCategories([...categories, newCategory]);
     }
-};
+  };
 
   const filteredExpenses = expenses.filter(expense => {
     const isDateMatch = filterDate ? expense.date === filterDate : true;
     const isCategoryMatch = filterCategory ? expense.category === filterCategory : true;
     return isDateMatch && isCategoryMatch;
   });
+
+  // Check if total expenses exceed or near the budget limit
+  useEffect(() => {
+    if (budgetLimit > 0 && totalExpenses >= budgetLimit) {
+      alert('You have exceeded your budget limit!');
+    } else if (budgetLimit > 0 && totalExpenses >= budgetLimit * 0.9) {
+      alert('You are nearing your budget limit!');
+    }
+  }, [totalExpenses, budgetLimit]);
 
   return (
     <div className="App">
@@ -61,7 +75,7 @@ function App() {
             addExpense={handleExpenseSubmit}
             currentExpense={currentExpenseIndex !== null ? expenses[currentExpenseIndex] : null}
             categories={categories}
-            addCategory={addCategory} //Pass the addCategory function to AddExpense
+            addCategory={addCategory}
           />
         </section>
 
@@ -100,8 +114,8 @@ function App() {
             </thead>
             <tbody>
               {filteredExpenses
-                .slice() // Create a copy of the expenses array
-                .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date in descending order
+                .slice()
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
                 .map((expense, index) => (
                   <tr key={index}>
                     <td>{expense.description}</td>
@@ -122,12 +136,20 @@ function App() {
           </table>
         </section>
         <section>
+          <h2>Set Budget Limit</h2>
+          <input
+            type="text"
+            value={budgetLimit}
+            onChange={(e) => setBudgetLimit(parseFloat(e.target.value))}
+            placeholder="Enter your budget limit (RWF)"
+          />
+          <p>Total Expenses: {totalExpenses.toLocaleString()} RWF</p>
+        </section>
+        <section>
           <h2>Expense Summary</h2>
-          {/* Chart for Expense Summary will go here */}
         </section>
       </main>
     </div>
   );
 }
-
 export default App;

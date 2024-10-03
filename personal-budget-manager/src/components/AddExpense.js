@@ -4,7 +4,7 @@ import CategoryModal from './CategoryModal';
 const AddExpense = ({ addExpense, currentExpense, categories, addCategory }) => {
     const [expense, setExpense] = useState({ description: '', amount: '', category: '', date: '' });
     const [error, setError] = useState('');
-    const [newCategory, setNewCategory] = useState('');
+    // const [newCategory, setNewCategory] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const today = new Date().toISOString().split("T")[0];
 
